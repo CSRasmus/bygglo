@@ -5,6 +5,7 @@ import { useAuthStore } from '@/lib/auth'
 const navItems = [
   { to: '/', label: 'Översikt', exact: true },
   { to: '/projekt', label: 'Projekt' },
+  { to: '/tidsplan', label: 'Tidsplan' },
   { to: '/avvikelser', label: 'Avvikelser' },
   { to: '/uppgifter', label: 'Uppgifter' },
 ]

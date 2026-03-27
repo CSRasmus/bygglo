@@ -8,6 +8,7 @@ import { LoginPage } from '@/pages/Login'
 import { ProjectsPage } from '@/pages/Projects'
 import { DeviationsPage } from '@/pages/Deviations'
 import { TasksPage } from '@/pages/Tasks'
+import { TidsplanPage } from '@/pages/Tidsplan'
 
 export default function App() {
   const { user, token, loading, login, setLoading, logout } = useAuthStore()
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="/projekt" element={<ProjectsPage />} />
         <Route path="/avvikelser" element={<DeviationsPage />} />
         <Route path="/uppgifter" element={<TasksPage />} />
+        <Route path="/tidsplan" element={<TidsplanPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
