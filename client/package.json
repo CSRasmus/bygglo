@@ -27,7 +27,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "lucide-react": "^0.294.0",
     "recharts": "^2.10.3",
-    "pdfjs-dist": "^3.14.159",
+    "pdfjs-dist": "^3.11.174",
     "react-pdf": "^7.5.0",
     "date-fns": "^2.30.0",
     "clsx": "^2.0.0",
