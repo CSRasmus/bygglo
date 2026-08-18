@@ -75,7 +75,7 @@ export function LoginPage() {
             {loading ? 'Loggar in...' : 'Logga in'}
           </button>
           <p className="text-center text-sm text-muted-foreground">
-            Demo: admin@bygglo.se / demo1234
+            Livstidsåtkomst: rasmus.nilsson9931@gmail.com
           </p>
         </form>
       </div>

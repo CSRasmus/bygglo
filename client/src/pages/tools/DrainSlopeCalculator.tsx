@@ -134,7 +134,7 @@ export function DrainSlopeCalculator() {
       operatingSystem: 'Web',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'SEK' },
       description: 'Beräkna rätt fall mot golvbrunn enligt AMA, BBR och GVK.',
-      url: 'https://platsledning.ai/verktyg/brunnfall-kalkylator',
+      url: 'https://byggos.vercel.app/verktyg/brunnfall-kalkylator',
     },
     {
       '@context': 'https://schema.org',

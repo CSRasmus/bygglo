@@ -3,4 +3,4 @@ Allow: /verktyg
 Allow: /verktyg/
 Disallow: /api/
 
-Sitemap: https://platsledning.ai/sitemap.xml
+Sitemap: https://byggos.vercel.app/sitemap.xml

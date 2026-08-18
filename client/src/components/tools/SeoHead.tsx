@@ -8,7 +8,7 @@ interface SeoHeadProps {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[]
 }
 
-const BASE_URL = 'https://platsledning.ai'
+const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://byggos.vercel.app'
 
 export function SeoHead({ title, description, path = '', type = 'website', jsonLd }: SeoHeadProps) {
   const fullTitle = title.includes('Platsledning.ai') ? title : `${title} | Platsledning.ai`

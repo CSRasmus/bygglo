@@ -34,7 +34,7 @@ export function ToolsIndex() {
           '@type': 'CollectionPage',
           name: 'Gratis byggverktyg – Platsledning.ai',
           description: 'Kostnadsfria verktyg för byggbranschen baserade på AMA och BBR.',
-          url: 'https://platsledning.ai/verktyg',
+          url: 'https://byggos.vercel.app/verktyg',
         }}
       />
 

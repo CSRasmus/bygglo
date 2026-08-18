@@ -17,6 +17,16 @@ export async function seed() {
     const userId = userResult.rows[0].id
     console.log('Created user:', userId)
 
+    const rasmusHash = await bcrypt.hash(process.env.WHITELIST_PASSWORD || 'Byggos2026!', 10)
+    await query(
+      `INSERT INTO users (email, password_hash, name, role)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name, role = EXCLUDED.role
+       RETURNING id`,
+      ['rasmus.nilsson9931@gmail.com', rasmusHash, 'Rasmus Nilsson', 'admin']
+    )
+    console.log('Created lifetime access user: rasmus.nilsson9931@gmail.com')
+
     // Create demo projects
     const proj1 = await query(
       `INSERT INTO projects (name, number, customer, address, start_date, end_date, budget, status, created_by)
@@ -100,6 +110,7 @@ export async function seed() {
 
     console.log('Database seeded successfully')
     console.log('Login: admin@bygglo.se / demo1234')
+    console.log('Lifetime access: rasmus.nilsson9931@gmail.com / Byggos2026!')
   } catch (error) {
     console.error('Seeding failed:', error)
     process.exit(1)
