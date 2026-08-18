@@ -1,9 +1,11 @@
 import { useState, FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/lib/auth'
 import { apiClient } from '@/lib/api'
 
 export function LoginPage() {
   const { login } = useAuthStore()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -16,6 +18,7 @@ export function LoginPage() {
     try {
       const res = await apiClient.post('/auth/login', { email, password })
       login(res.data.user, res.data.token)
+      navigate('/')
     } catch (err: any) {
       setError(err.response?.data?.error || 'Inloggning misslyckades')
     } finally {
@@ -29,6 +32,12 @@ export function LoginPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold">Platsledning.ai</h1>
           <p className="text-muted-foreground mt-2">Projektledning för byggbranschen</p>
+          <Link
+            to="/verktyg"
+            className="inline-block mt-3 text-sm text-teal-700 hover:text-teal-900 transition-colors"
+          >
+            → Gratis byggverktyg utan inloggning
+          </Link>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-lg p-8">
           {error && (

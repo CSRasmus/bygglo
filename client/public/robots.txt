@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /verktyg
+Allow: /verktyg/
+Disallow: /api/
+
+Sitemap: https://platsledning.ai/sitemap.xml
