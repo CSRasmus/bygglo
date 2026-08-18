@@ -117,7 +117,7 @@ export function TasksPage() {
                           <button onClick={() => { if (confirm('Ta bort?')) deleteTask.mutate(t.id) }} className="text-xs text-red-400 hover:text-red-600 px-1">✕</button>
                         </div>
                       </div>
-                      {t.due_date && <div className="text-xs text-muted-foreground mt-1">📅 {new Date(t.due_date).toLocaleDateString('sv-SE')}</div>}
+                      {t.dueDate && <div className="text-xs text-muted-foreground mt-1">📅 {new Date(t.dueDate).toLocaleDateString('sv-SE')}</div>}
                     </div>
                   ))}
                 </div>

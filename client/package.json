@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -27,14 +29,16 @@
     "@radix-ui/react-popover": "^1.0.7",
     "lucide-react": "^0.294.0",
     "recharts": "^2.10.3",
-    "pdfjs-dist": "^3.14.159",
+    "pdfjs-dist": "^4.10.38",
     "react-pdf": "^7.5.0",
     "date-fns": "^2.30.0",
     "clsx": "^2.0.0",
     "tailwind-merge": "^2.2.1",
     "class-variance-authority": "^0.7.0",
     "zod": "^3.22.4",
-    "axios-auth-refresh": "^3.3.6"
+    "axios-auth-refresh": "^3.3.6",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
@@ -49,6 +53,10 @@
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5"
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vitest": "^1.2.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@vercel/node": "^3.2.0"
   }
 }

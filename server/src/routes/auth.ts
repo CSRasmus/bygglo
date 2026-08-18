@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { query } from '../config/database.js'
 import { authenticateToken, AuthRequest } from '../middleware/auth.js'
+import { getTokenExpiry } from '../lib/accessWhitelist.js'
 
 const router = Router()
 
@@ -29,7 +30,7 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET || 'secret',
-      { expiresIn: '7d' }
+      { expiresIn: getTokenExpiry(user.email) }
     )
 
     res.status(201).json({ token, user })
@@ -64,7 +65,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET || 'secret',
-      { expiresIn: '7d' }
+      { expiresIn: getTokenExpiry(user.email) }
     )
 
     const { password_hash: _, ...safeUser } = user

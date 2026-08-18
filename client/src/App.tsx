@@ -1,53 +1,21 @@
-import { useEffect } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from '@/lib/auth'
-import { apiClient } from '@/lib/api'
-import { Layout } from '@/components/Layout'
-import { Dashboard } from '@/pages/Dashboard'
+import { Routes, Route } from 'react-router-dom'
+import { ToolsLayout } from '@/components/tools/ToolsLayout'
+import { ProtectedApp } from '@/components/ProtectedApp'
 import { LoginPage } from '@/pages/Login'
-import { ProjectsPage } from '@/pages/Projects'
-import { DeviationsPage } from '@/pages/Deviations'
-import { TasksPage } from '@/pages/Tasks'
+import { ToolsIndex } from '@/pages/tools/ToolsIndex'
+import { DrainSlopeCalculator } from '@/pages/tools/DrainSlopeCalculator'
 
 export default function App() {
-  const { user, token, loading, login, setLoading, logout } = useAuthStore()
-
-  useEffect(() => {
-    if (!token) {
-      setLoading(false)
-      return
-    }
-    apiClient.get('/auth/me')
-      .then(res => {
-        login(res.data, token)
-      })
-      .catch(() => {
-        logout()
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg text-gray-500">Laddar...</div>
-      </div>
-    )
-  }
-
-  if (!user) {
-    return <LoginPage />
-  }
-
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/projekt" element={<ProjectsPage />} />
-        <Route path="/avvikelser" element={<DeviationsPage />} />
-        <Route path="/uppgifter" element={<TasksPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/verktyg" element={<ToolsLayout />}>
+        <Route index element={<ToolsIndex />} />
+        <Route path="brunnfall-kalkylator" element={<DrainSlopeCalculator />} />
+      </Route>
+
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route path="/*" element={<ProtectedApp />} />
+    </Routes>
   )
 }

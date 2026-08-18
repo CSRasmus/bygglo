@@ -27,11 +27,31 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running!' });
 });
 
-const DEMO_USER = { id: 'user-1', email: 'admin@bygglo.se', name: 'Admin', role: 'projectManager' };
+const USERS = {
+  rasmus: { id: 'user-rasmus', email: 'rasmus.nilsson9931@gmail.com', name: 'Rasmus Nilsson', role: 'admin' },
+  admin: { id: 'user-1', email: 'admin@bygglo.se', name: 'Admin', role: 'projectManager' },
+};
+
+const WHITELIST_PASSWORD = process.env.WHITELIST_PASSWORD || 'Byggos2026!';
+
+function authenticateLogin(email, password) {
+  const normalized = (email || '').toLowerCase().trim();
+  if (normalized === 'rasmus.nilsson9931@gmail.com' && password === WHITELIST_PASSWORD) {
+    return USERS.rasmus;
+  }
+  if (normalized === 'admin@bygglo.se' && password === 'demo1234') {
+    return USERS.admin;
+  }
+  return null;
+}
 
 // Auth routes
 app.post('/api/auth/login', (req, res) => {
-  res.json({ token: 'demo-token', user: DEMO_USER });
+  const user = authenticateLogin(req.body?.email, req.body?.password);
+  if (!user) {
+    return res.status(401).json({ error: 'Felaktig e-post eller lösenord' });
+  }
+  res.json({ token: `demo-token-${user.id}`, user });
 });
 
 app.post('/api/auth/register', (req, res) => {
@@ -43,7 +63,9 @@ app.post('/api/auth/logout', (req, res) => {
 });
 
 app.get('/api/auth/me', (req, res) => {
-  res.json(DEMO_USER);
+  const auth = req.headers.authorization || '';
+  if (auth.includes('user-rasmus')) return res.json(USERS.rasmus);
+  res.json(USERS.admin);
 });
 
 // In-memory store for mutations
